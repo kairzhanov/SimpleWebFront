@@ -1,0 +1,5 @@
+<p>Products of user (id - {{ userId }}):</p>
+
+<ul>
+    <li *ngFor="let userProduct of userProducts">{{ userProduct.productName}} (id - {{ userProduct.productId }})</li>
+</ul>

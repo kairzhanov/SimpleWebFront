@@ -1,0 +1,7 @@
+<h4>Welcome to SimpleWebProject</h4>
+<p>The list of users (click on the name):</p>
+<ul>
+    <li *ngFor="let user of users">
+        <a [routerLink]="['user-products/user', user.userId]" >{{ user.name }}</a>
+    </li>
+</ul>
