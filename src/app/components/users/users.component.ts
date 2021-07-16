@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, SubscriptionLike } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -9,9 +9,10 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   public users: User[] = [];
+  private getUsers$: Subscription = new Subscription();
 
   constructor(private userService: UsersService, private router: Router) { }
 
@@ -20,7 +21,7 @@ export class UsersComponent implements OnInit {
   }
 
   private GetAllUsers() {
-    this.userService.getAllUsers().subscribe(result => {
+    this.getUsers$ = this.userService.getAllUsers().subscribe(result => {
       this.users = result;
     });
   }
@@ -29,10 +30,10 @@ export class UsersComponent implements OnInit {
     this.router.navigateByUrl(`/user-product/user/${userId}`);
   }
 
-  // ngOnDestroy() {
-    // if (this.subscription) {
-    //   this.subscription.unsubscribe();
-    // }
-  
+  ngOnDestroy() {
+    if (this.getUsers$) {
+      this.getUsers$.unsubscribe();
+    }
+  }
 
 }
