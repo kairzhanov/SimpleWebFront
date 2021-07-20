@@ -10,6 +10,7 @@ import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
 import { UserProductComponent } from './components/user-product/user-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserProductComponent } from './components/user-product/user-product.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]
